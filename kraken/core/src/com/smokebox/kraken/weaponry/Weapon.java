@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.smokebox.kraken.Game;
 import com.smokebox.kraken.character.Wielding;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Polygon;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Polygon;
 
 public abstract class Weapon {
 

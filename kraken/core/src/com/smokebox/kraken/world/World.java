@@ -5,19 +5,19 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.smokebox.kraken.Game;
 import com.smokebox.kraken.ability.CollidesWithWorld;
 import com.smokebox.kraken.weaponry.ammunition.Projectile;
-import com.smokebox.lib.pcg.dungeon.RoomSpreadDungeon;
-import com.smokebox.lib.pcg.dungeon.RoomsWithTree;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.MathUtils;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.HalfSpace;
-import com.smokebox.lib.utils.geom.Line;
-import com.smokebox.lib.utils.geom.Rectangle;
-import com.smokebox.lib.utils.geom.UnifiablePolyedge;
-import com.smokebox.lib.utils.pathfinding.Connection;
-import com.smokebox.lib.utils.pathfinding.Euclidian;
-import com.smokebox.lib.utils.pathfinding.PathfindAStar;
-import com.smokebox.lib.utils.pathfinding.StarNode;
+import com.wilhelmsen.gamelib.pcg.dungeon.RoomSpreadDungeon;
+import com.wilhelmsen.gamelib.pcg.dungeon.RoomsWithTree;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.MathUtils;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.HalfSpace;
+import com.wilhelmsen.gamelib.utils.geom.Line;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.geom.UnifiablePolyedge;
+import com.wilhelmsen.gamelib.utils.pathfinding.Connection;
+import com.wilhelmsen.gamelib.utils.pathfinding.Euclidian;
+import com.wilhelmsen.gamelib.utils.pathfinding.AStar;
+import com.wilhelmsen.gamelib.utils.pathfinding.StarNode;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,7 +30,7 @@ public class World {
 	
 	private ArrayList<HalfSpace> walls = new ArrayList<HalfSpace>();
 	
-	private PathfindAStar pathfinder;
+	private AStar pathfinder;
 	
 	Game game;
 	
@@ -38,9 +38,9 @@ public class World {
 	public World(int size, long seed, Game game) {
 		this.game = game;
 		
-		pathfinder = new PathfindAStar();
+		pathfinder = new AStar();
 		if(seed == 0) seed = (long)Math.round(Math.random()*10000);
-		RoomsWithTree dungeon = RoomSpreadDungeon.RoomSpreadFloor(size, 5, 5, new Random(seed));
+		RoomsWithTree dungeon = RoomSpreadDungeon.roomSpreadFloor(size, 5, 5, new Random(seed));
 		
 		int[][] asInt = RoomSpreadDungeon.asInt2(dungeon);
 		
@@ -68,7 +68,7 @@ public class World {
 		}
 		
 		UnifiablePolyedge p = new UnifiablePolyedge(lines);
-		pathfinder.defineWorldFromPolyedge(p, dungeon);
+		pathfinder.defineWorldFromPolyedge(p);
 		lines = p.getEdges();
 		
 		for(Line l : lines) {
@@ -155,8 +155,8 @@ public class World {
 	public ArrayList<Vector2> getPath(Vector2 start, Vector2 end) {
 		ArrayList<Vector2> path = new ArrayList<Vector2>();
 		path.add(start);
-		StarNode endNode = pathfinder.getNodeClosestTo(end);
-		ArrayList<StarNode> nodePath = pathfinder.findPath(pathfinder.getNodeClosestTo(start), endNode, new Euclidian(new Vector2(end.x, end.y)));
+		StarNode endNode = pathfinder.getNodeClosestTo(end.x, end.y);
+		ArrayList<StarNode> nodePath = pathfinder.findPath(pathfinder.getNodeClosestTo(start.x, start.y), endNode, new Euclidian(end.x, end.y));
 		if(nodePath != null) {
 			for(StarNode i : nodePath) {
 				path.add(new Vector2(i.x, i.y));

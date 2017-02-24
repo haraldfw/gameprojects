@@ -10,8 +10,8 @@ import com.smokebox.kraken.Game;
 import com.smokebox.kraken.character.Wielding;
 import com.smokebox.kraken.effect.ParticleBurst_Shoot;
 import com.smokebox.kraken.weaponry.ammunition.Pellet;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Polygon;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Polygon;
 
 /**
  * @author Harald Floor Wilhelmsen

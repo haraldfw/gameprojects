@@ -22,8 +22,8 @@ import com.smokebox.kraken.screen.HUD;
 import com.smokebox.kraken.weaponry.*;
 import com.smokebox.kraken.weaponry.ammunition.Projectile;
 import com.smokebox.kraken.world.World;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 import java.io.IOException;
 import java.util.ArrayList;

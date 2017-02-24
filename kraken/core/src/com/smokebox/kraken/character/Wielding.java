@@ -5,7 +5,7 @@ package com.smokebox.kraken.character;
 
 import com.smokebox.kraken.Game;
 import com.smokebox.kraken.weaponry.Weapon;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 /**
  * @author Harald Floor Wilhelmsen

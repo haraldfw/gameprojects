@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.smokebox.kraken.Game;
 import com.smokebox.kraken.ability.ProjectileHittable;
 import com.smokebox.kraken.effect.ParticleBurst_ProjectileShatter;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 /**
  * @author Harald Floor Wilhelmsen

@@ -11,8 +11,8 @@ import com.smokebox.kraken.Game;
 import com.smokebox.kraken.ability.*;
 import com.smokebox.kraken.weaponry.Weapon;
 import com.smokebox.kraken.weaponry.ammunition.Projectile;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Polygon;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Polygon;
 
 /**
  * @author Harald Floor Wilhelmsen

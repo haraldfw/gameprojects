@@ -3,7 +3,7 @@
  */
 package com.smokebox.kraken.ability;
 
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 /**
  * @author Harald Floor Wilhelmsen

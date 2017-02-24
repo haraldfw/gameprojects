@@ -5,7 +5,7 @@ package com.smokebox.kraken.ability;
 
 import com.smokebox.kraken.Game;
 import com.smokebox.kraken.weaponry.ammunition.Projectile;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 
 /**
