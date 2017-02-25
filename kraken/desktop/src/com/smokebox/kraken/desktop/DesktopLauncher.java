@@ -5,11 +5,11 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.smokebox.kraken.Game;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		int scl = 60;
-		config.width = 32*scl;
-		config.height = 18*scl;
-		new LwjglApplication(new Game(), config);
-	}
+    public static void main(String[] arg) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        int scl = 60;
+        config.width = 32 * scl;
+        config.height = 18 * scl;
+        new LwjglApplication(new Game(), config);
+    }
 }
