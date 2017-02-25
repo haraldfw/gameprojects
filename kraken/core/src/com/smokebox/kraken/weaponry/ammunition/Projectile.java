@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.smokebox.kraken.weaponry.ammunition;
 
@@ -10,26 +10,30 @@ import com.wilhelmsen.gamelib.utils.Vector2;
 
 /**
  * @author Harald Floor Wilhelmsen
- *
  */
 public interface Projectile {
-	
-	public Game.Team getTeam();
-	
-	public void integrate(float delta);
 
-	public void draw(ShapeRenderer sr);
+    public Game.Team getTeam();
 
-	public void addForce(Vector2 force);
+    public void integrate(float delta);
 
-	public Vector2 getPos();
-	public Vector2 getVel();
-	public boolean isAlive();
-	public float getInverseMass();
+    public void draw(ShapeRenderer sr);
 
-	public void handleHitting(ProjectileHittable character);
-	
-	public float getBoundingRadius();
-	public void handleWallIntersection(Vector2 penetration);
-	public void handleOutsideWalls(Vector2 closestDistance);
+    public void addForce(Vector2 force);
+
+    public Vector2 getPos();
+
+    public Vector2 getVel();
+
+    public boolean isAlive();
+
+    public float getInverseMass();
+
+    public void handleHitting(ProjectileHittable character);
+
+    public float getBoundingRadius();
+
+    public void handleWallIntersection(Vector2 penetration);
+
+    public void handleOutsideWalls(Vector2 closestDistance);
 }
