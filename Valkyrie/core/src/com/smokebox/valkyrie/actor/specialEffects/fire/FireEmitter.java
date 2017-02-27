@@ -2,8 +2,8 @@ package com.smokebox.valkyrie.actor.specialEffects.fire;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.smokebox.lib.utils.MathUtils;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.MathUtils;
+import com.wilhelmsen.gamelib.utils.Vector2;
 import com.smokebox.valkyrie.actor.specialEffects.EffectsHandler.Size;
 import com.smokebox.valkyrie.actor.specialEffects.SmallEffect;
 

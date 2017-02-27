@@ -8,8 +8,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.Interactable;
 import com.smokebox.valkyrie.actor.character.player.PlayableCharacter;
 

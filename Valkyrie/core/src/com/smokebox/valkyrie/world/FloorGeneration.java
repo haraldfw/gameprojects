@@ -7,8 +7,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.Game;
 
 import java.util.ArrayList;

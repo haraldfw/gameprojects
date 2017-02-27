@@ -1,7 +1,7 @@
 package com.smokebox.valkyrie.module.activation;
 
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Line;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Line;
 import com.smokebox.valkyrie.actor.ability.DamageReceiver;
 import com.smokebox.valkyrie.actor.ability.SkillUser;
 

@@ -1,6 +1,6 @@
 package com.smokebox.valkyrie.actor.ability;
 
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 public interface Movable {
 

@@ -2,7 +2,7 @@ package com.smokebox.valkyrie.module.input;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.PovDirection;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 
 public class XboxController implements InputModule {
 	

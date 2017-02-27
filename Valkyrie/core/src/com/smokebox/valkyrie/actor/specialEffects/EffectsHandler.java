@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 import com.smokebox.valkyrie.Game;
 import com.smokebox.valkyrie.actor.specialEffects.fire.FireEmitter;
 import com.smokebox.valkyrie.actor.specialEffects.fire.FireHandler;

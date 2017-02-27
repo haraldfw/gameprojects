@@ -1,8 +1,8 @@
 package com.smokebox.valkyrie.trigger;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.smokebox.lib.utils.geom.Circle;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.geom.Circle;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 
 public abstract class Trigger  {
 

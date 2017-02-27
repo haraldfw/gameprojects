@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Circle;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Circle;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.Game;
 import com.smokebox.valkyrie.Interactable;
 import com.smokebox.valkyrie.actor.ability.CollidesWorld;
@@ -65,7 +65,7 @@ public class Floor {
 
         for(RectangleMapObject l : collisionRects) {
             com.badlogic.gdx.math.Rectangle r = l.getRectangle();
-            Vector2 pen = new Vector2(Intersect.horisontalPenetrationRectRect(hb.x, r.x, hb.width, r.width),
+            Vector2 pen = new Vector2(Intersect.horizontalPenetrationRectRect(hb.x, r.x, hb.width, r.width),
                     Intersect.verticalPenetrationRectRect(hb.y, r.y, hb.height, r.height));
 			if(Math.abs(pen.x) > Math.abs(pen.y)) pen.x = 0;
 			else pen.y = 0;

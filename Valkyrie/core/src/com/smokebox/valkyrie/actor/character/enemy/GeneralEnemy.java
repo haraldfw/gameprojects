@@ -1,9 +1,9 @@
 package com.smokebox.valkyrie.actor.character.enemy;
 
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Circle;
-import com.smokebox.lib.utils.geom.Line;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Circle;
+import com.wilhelmsen.gamelib.utils.geom.Line;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.actor.ability.DamageReceiver;
 import com.smokebox.valkyrie.actor.character.GeneralCharacter;
 

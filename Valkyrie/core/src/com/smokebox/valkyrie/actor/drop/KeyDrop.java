@@ -1,9 +1,9 @@
 package com.smokebox.valkyrie.actor.drop;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Rectangle;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.actor.character.player.PlayableCharacter;
 
 /**

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.XmlReader;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 import com.smokebox.valkyrie.Game;
 import com.smokebox.valkyrie.actor.ability.Drawable;
 import com.smokebox.valkyrie.actor.character.player.PlayableCharacter;

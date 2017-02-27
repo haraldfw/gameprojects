@@ -1,7 +1,7 @@
 package com.smokebox.valkyrie.module.movement;
 
 import com.badlogic.gdx.utils.XmlReader.Element;
-import com.smokebox.lib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.Vector2;
 import com.smokebox.valkyrie.Game;
 import com.smokebox.valkyrie.actor.ability.Movable;
 
