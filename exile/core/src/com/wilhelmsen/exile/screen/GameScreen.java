@@ -1,7 +1,6 @@
 package com.wilhelmsen.exile.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.wilhelmsen.exile.ExileGame;
@@ -9,13 +8,12 @@ import com.wilhelmsen.exile.ExileGame;
 /**
  * Created by Harald on 26.02.2017.
  */
-public class GameScreen implements Screen {
+public class GameScreen extends ExileScreen {
 
     private OrthographicCamera camera;
-    private ExileGame game;
 
     public GameScreen(ExileGame game) {
-        this.game = game;
+        super(game);
     }
 
     @Override
@@ -28,7 +26,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(camera.combined);
+        game.gameBatch.setProjectionMatrix(camera.combined);
         updateCamera();
 
     }
