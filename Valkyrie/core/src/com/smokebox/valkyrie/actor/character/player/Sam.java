@@ -5,11 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.XmlReader;
-import com.smokebox.lib.utils.Intersect;
-import com.smokebox.lib.utils.Vector2;
-import com.smokebox.lib.utils.geom.Circle;
-import com.smokebox.lib.utils.geom.Line;
-import com.smokebox.lib.utils.geom.Rectangle;
 import com.smokebox.valkyrie.Game;
 import com.smokebox.valkyrie.module.activation.Activation_buttonA;
 import com.smokebox.valkyrie.module.activation.Activation_buttonLB;
@@ -18,6 +13,11 @@ import com.smokebox.valkyrie.module.movement.MovementExecutionModule;
 import com.smokebox.valkyrie.module.skill.Jump;
 import com.smokebox.valkyrie.module.skill.LightningDash;
 import com.smokebox.valkyrie.module.skill.SkillModule;
+import com.wilhelmsen.gamelib.utils.Intersect;
+import com.wilhelmsen.gamelib.utils.Vector2;
+import com.wilhelmsen.gamelib.utils.geom.Circle;
+import com.wilhelmsen.gamelib.utils.geom.Line;
+import com.wilhelmsen.gamelib.utils.geom.Rectangle;
 
 import java.util.ArrayList;
 
@@ -30,10 +30,9 @@ public class Sam extends PlayableCharacter {
     Rectangle currentHitbox = new Rectangle();
 
     public Sam(Vector2 pos,
-                MoveMotivationModule mm,
-                MovementExecutionModule me,
-                Game game, XmlReader.Element xml)
-    {
+               MoveMotivationModule mm,
+               MovementExecutionModule me,
+               Game game, XmlReader.Element xml) {
         super(pos, mm, me, new Animation[0], game, xml);
         ArrayList<SkillModule> skills = new ArrayList<SkillModule>();
         skills.add(new LightningDash(game, new Activation_buttonLB(game.getInputEntity()), this, xml));
@@ -47,10 +46,10 @@ public class Sam extends PlayableCharacter {
 
     private TextureRegion[] extractFrames(String filepath, int frameWidth, int frameHeight) {
         TextureRegion tmp[][] = TextureRegion.split(new Texture(new FileHandle(filepath)), frameWidth, frameHeight);
-        TextureRegion[] frames = new TextureRegion[tmp.length*tmp[0].length];
+        TextureRegion[] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
-        for(int  i = 0; i < tmp.length; i++) {
-            for(int j = 0; j < tmp[0].length; j++) {
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < tmp[0].length; j++) {
                 frames[index++] = tmp[i][j];
             }
         }
@@ -84,10 +83,10 @@ public class Sam extends PlayableCharacter {
     }
 
     private void updateCurrentHitbox() {
-        currentHitbox.x = pos.x + (super.lookingRight() ? 3f*game.pixelSize : 0);
+        currentHitbox.x = pos.x + (super.lookingRight() ? 3f * game.pixelSize : 0);
         currentHitbox.y = pos.y;
-        currentHitbox.width = 7*game.pixelSize;
-        currentHitbox.height = 12*game.pixelSize;
+        currentHitbox.width = 7 * game.pixelSize;
+        currentHitbox.height = 12 * game.pixelSize;
     }
 
     @Override
@@ -102,6 +101,6 @@ public class Sam extends PlayableCharacter {
 
     @Override
     public Vector2 getAttackRootCoordinates() {
-        return new Vector2(pos).add(currentHitbox.width/2, 0);
+        return new Vector2(pos).add(currentHitbox.width / 2, 0);
     }
 }

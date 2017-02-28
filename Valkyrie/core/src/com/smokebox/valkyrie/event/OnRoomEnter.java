@@ -7,5 +7,5 @@ import com.smokebox.valkyrie.world.Room;
  */
 public interface OnRoomEnter {
 
-	public void onRoomEnter(Room room);
+    public void onRoomEnter(Room room);
 }

@@ -8,24 +8,23 @@ import com.smokebox.valkyrie.actor.character.player.PlayableCharacter;
 
 public class HeadsUpDisplay {
 
-	PlayableCharacter player;
-	
-	BitmapFont font;
-	
-	float healthWidth = 10;
-	
-	Sprite healthInside;
-	Sprite healthStroke;
-	
-	
-	
-	public HeadsUpDisplay(PlayableCharacter player, AssetManager astMng) {
-		this.player = player;
-		
-		
-	}
-	
-	public void draw(SpriteBatch sb) {
-		
-	}
+    PlayableCharacter player;
+
+    BitmapFont font;
+
+    float healthWidth = 10;
+
+    Sprite healthInside;
+    Sprite healthStroke;
+
+
+    public HeadsUpDisplay(PlayableCharacter player, AssetManager astMng) {
+        this.player = player;
+
+
+    }
+
+    public void draw(SpriteBatch sb) {
+
+    }
 }

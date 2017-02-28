@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public interface SmallEffect {
 
-	public boolean update(float delta);
-	public void draw(SpriteBatch sb);
-	public void shapeDraw(ShapeRenderer sr);
+    public boolean update(float delta);
+
+    public void draw(SpriteBatch sb);
+
+    public void shapeDraw(ShapeRenderer sr);
 }
