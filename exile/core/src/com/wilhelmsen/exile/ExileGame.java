@@ -1,33 +1,38 @@
 package com.wilhelmsen.exile;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.wilhelmsen.exile.screen.Aspect;
+import com.wilhelmsen.exile.screen.GameScreen;
 
-public class ExileGame extends ApplicationAdapter {
-    SpriteBatch batch;
-    Texture img;
+public class ExileGame extends Game {
+
+    public SpriteBatch batch;
+    public final float delta = 1f / 60f;
+
+    public Aspect aspect;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
+        float ratio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
+        Aspect aspect = Aspect.getFromAspect(ratio);
+        if (aspect == null) {
+            System.out.println("Invalid aspect ratio of " + ratio);
+            System.exit(-1);
+        }
+        this.aspect = aspect;
+        setScreen(new GameScreen(this));
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(img, 0, 0);
-        batch.end();
+        super.render();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
     }
 }

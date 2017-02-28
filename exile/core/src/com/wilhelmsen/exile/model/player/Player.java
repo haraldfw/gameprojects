@@ -5,4 +5,5 @@ package com.wilhelmsen.exile.model.player;
  */
 public abstract class Player {
 
+
 }
