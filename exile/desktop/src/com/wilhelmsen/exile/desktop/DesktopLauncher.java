@@ -1,10 +1,8 @@
 package com.wilhelmsen.exile.desktop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.wilhelmsen.exile.ExileGame;
-import com.wilhelmsen.exile.screen.Aspect;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {
