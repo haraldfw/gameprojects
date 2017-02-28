@@ -24,13 +24,12 @@ abstract class MenuScreen extends ExileScreen {
         super(game);
     }
 
-
     @Override
     public void show() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
-        createBasicSkin();
+        skin = createBasicSkin();
     }
 
     @Override
@@ -42,10 +41,10 @@ abstract class MenuScreen extends ExileScreen {
         stage.draw();
     }
 
-    private void createBasicSkin() {
+    private Skin createBasicSkin() {
         //Create a font
         BitmapFont font = new BitmapFont();
-        skin = new Skin();
+        Skin skin = new Skin();
         skin.add("default", font);
 
         //Create a texture
@@ -73,5 +72,6 @@ abstract class MenuScreen extends ExileScreen {
         textFieldStyle.focusedFontColor = Color.WHITE;
 
         skin.add("default", textFieldStyle);
+        return skin;
     }
 }

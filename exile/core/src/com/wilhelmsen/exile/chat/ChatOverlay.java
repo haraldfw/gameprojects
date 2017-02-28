@@ -1,8 +1,16 @@
 package com.wilhelmsen.exile.chat;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.google.common.base.Splitter;
 
 import java.text.SimpleDateFormat;
@@ -27,33 +35,60 @@ public class ChatOverlay {
     private SpriteBatch chatBatch;
     private BitmapFont chatFont;
 
+    private TextField textInput;
+    private Stage stage;
+
     public ChatOverlay() {
         this.chatBatch = new SpriteBatch();
         messages = new LinkedList<>();
         simpleDateFormat = new SimpleDateFormat("H:m:s");
         chatFont = new BitmapFont();
         chatFont.setColor(Color.WHITE);
+        stage = new Stage();
+        textInput = new TextField("", createBasicSkin());
+        textInput.setPosition(0, 0);
+        textInput.setSize(400, chatFont.getLineHeight()*1.2f);
+        stage.addActor(textInput);
     }
 
     public void draw(float delta) {
         secondsSinceLastMessage += delta;
+
+        chatBatch.begin();
         if (isActive) {
+            drawTextField();
             drawMessages(maxEntries);
         } else if (secondsSinceLastMessage < showNewMessagesForSeconds) {
             drawMessages(entriesOnUpdate);
         }
+        chatBatch.end();
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            if(isActive) {
+                addMessage(textInput.getText(), "you");
+                textInput.setText("");
+            } else {
+                Gdx.input.setInputProcessor(stage);
+                stage.setKeyboardFocus(textInput);
+            }
+            isActive = !isActive;
+        }
+    }
+
+    private void drawTextField() {
+//        textInput.draw(chatBatch, 1);
+        stage.act();
+        stage.draw();
     }
 
     private void drawMessages(int messageAmount) {
-        chatBatch.begin();
         int endIndex = messages.size() - messageAmount;
-        int drawShift = 0;
+        float shiftIndex = 0;
         for (int i = messages.size() - 1; i >= 0 && i >= endIndex; i--) {
-            drawShift++;
+            shiftIndex++;
             String message = messages.get(i);
-            chatFont.draw(chatBatch, message, xShift, chatFont.getLineHeight() * (drawShift + yShiftPerLine));
+            chatFont.draw(chatBatch, message, xShift, chatFont.getLineHeight() * (shiftIndex + yShiftPerLine));
         }
-        chatBatch.end();
     }
 
     public void addMessage(String message, String sender) {
@@ -74,5 +109,33 @@ public class ChatOverlay {
         if (messages.size() > maxEntries) {
             messages.removeFirst();
         }
+    }
+
+
+
+    // Here for debugging
+    private Skin createBasicSkin() {
+        //Create a font
+        BitmapFont font = new BitmapFont();
+        Skin skin = new Skin();
+        skin.add("default", font);
+
+        //Create a texture
+        Pixmap pixmap = new Pixmap((int) (Gdx.graphics.getWidth() / 4f),
+                (int) (Gdx.graphics.getHeight() / 10f), Pixmap.Format.RGB888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+        skin.add("background", new Texture(pixmap));
+        skin.add("cursor", new Texture(new Pixmap(2, 20, Pixmap.Format.RGB888)));
+
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.background = skin.newDrawable("background", Color.DARK_GRAY);
+        textFieldStyle.cursor = skin.newDrawable("cursor", Color.LIGHT_GRAY);
+        textFieldStyle.font = skin.getFont("default");
+        textFieldStyle.fontColor = Color.LIGHT_GRAY;
+        textFieldStyle.focusedFontColor = Color.WHITE;
+
+        skin.add("default", textFieldStyle);
+        return skin;
     }
 }
