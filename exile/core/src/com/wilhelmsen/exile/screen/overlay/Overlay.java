@@ -36,7 +36,6 @@ public class Overlay {
     void claimKeyboardFocus(Actor actor) {
         prevFocus = stage.getKeyboardFocus();
         stage.setKeyboardFocus(actor);
-        System.out.println(actor.toString());
     }
 
     void relieveKeyboardFocus() {
