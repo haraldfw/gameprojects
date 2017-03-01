@@ -3,20 +3,20 @@ package com.wilhelmsen.exile;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.wilhelmsen.exile.chat.ChatOverlay;
 import com.wilhelmsen.exile.screen.Aspect;
 import com.wilhelmsen.exile.screen.MainMenuScreen;
+import com.wilhelmsen.exile.screen.overlay.Overlay;
 
 public class ExileGame extends Game {
 
     public final float delta = 1f / 60f;
     public SpriteBatch gameBatch;
     public Aspect aspect;
-    private ChatOverlay chatOverlay;
+    private Overlay overlay;
 
     @Override
     public void create() {
-        chatOverlay = new ChatOverlay();
+        overlay = new Overlay(this);
         gameBatch = new SpriteBatch();
         float ratio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
         Aspect aspect = Aspect.getFromAspect(ratio);
@@ -31,7 +31,7 @@ public class ExileGame extends Game {
     @Override
     public void render() {
         super.render();
-        chatOverlay.draw(delta);
+        overlay.updateAndDraw(delta);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class ExileGame extends Game {
     }
 
     public void addChatMessage(String message, String sender) {
-        chatOverlay.addMessage(message, sender);
+        overlay.chat.addMessage(message, sender);
     }
 }

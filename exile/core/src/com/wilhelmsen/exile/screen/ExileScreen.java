@@ -6,10 +6,10 @@ import com.wilhelmsen.exile.ExileGame;
 /**
  * Created by Harald on 28.02.2017.
  */
-abstract class ExileScreen implements Screen {
-    ExileGame game;
+public abstract class ExileScreen implements Screen {
+    public final ExileGame game;
 
-    ExileScreen(ExileGame game) {
+    public ExileScreen(ExileGame game) {
         this.game = game;
     }
 }

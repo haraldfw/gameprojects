@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.wilhelmsen.exile.ExileGame;
+import com.wilhelmsen.exile.screen.settings.SettingsScreen;
 
 /**
  * Created by Harald on 28.02.2017.

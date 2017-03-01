@@ -15,12 +15,12 @@ import com.wilhelmsen.exile.ExileGame;
 /**
  * Created by Harald on 28.02.2017.
  */
-abstract class MenuScreen extends ExileScreen {
+public abstract class MenuScreen extends ExileScreen {
 
-    Skin skin;
-    Stage stage;
+    public Skin skin;
+    public Stage stage;
 
-    MenuScreen(ExileGame game) {
+    public MenuScreen(ExileGame game) {
         super(game);
     }
 
@@ -69,6 +69,7 @@ abstract class MenuScreen extends ExileScreen {
         textFieldStyle.cursor = skin.newDrawable("cursor", Color.LIGHT_GRAY);
         textFieldStyle.font = skin.getFont("default");
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
+        textFieldStyle.selection = skin.newDrawable("background", 0.5f, 0.5f, 0.5f, 0.5f);
         textFieldStyle.focusedFontColor = Color.WHITE;
 
         skin.add("default", textFieldStyle);

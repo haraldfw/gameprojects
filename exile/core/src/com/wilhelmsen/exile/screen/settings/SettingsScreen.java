@@ -1,4 +1,4 @@
-package com.wilhelmsen.exile.screen;
+package com.wilhelmsen.exile.screen.settings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -7,17 +7,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.wilhelmsen.exile.ExileGame;
+import com.wilhelmsen.exile.screen.MainMenuScreen;
+import com.wilhelmsen.exile.screen.MenuScreen;
 
 /**
  * Created by Harald on 28.02.2017.
  */
 public class SettingsScreen extends MenuScreen {
 
-    private Preferences prefs;
-    private float scrWidth;
-    private float scrHeight;
-    private float buttonWidth;
-    private float buttonHeight;
+    Preferences prefs;
+    float scrWidth;
+    float scrHeight;
+    float buttonWidth;
+    float buttonHeight;
 
     public SettingsScreen(ExileGame game) {
         super(game);
@@ -37,61 +39,38 @@ public class SettingsScreen extends MenuScreen {
         float xPosRight = buttonWidth / 2;
         float yStart = scrHeight / 2;
 
-        TextFieldValidator validator = new TextFieldValidator();
+        final TextField nameField = new TextField("player name", skin);
+        nameField.setPosition(xPosLeft, yStart);
+        nameField.setSize(buttonWidth, buttonHeight);
+        nameField.setTextFieldListener(new NameFieldValidator());
+        nameField.setText(prefs.getString("player_name"));
+        stage.addActor(nameField);
+
+        ResolutionFieldValidator validator = new ResolutionFieldValidator();
 
         final TextField resWidthField = new TextField("res x", skin);
-        resWidthField.setPosition(xPosLeft, yStart);
+        resWidthField.setPosition(xPosLeft, yStart - getPos(buttonHeight, 1));
         resWidthField.setSize(buttonWidth, buttonHeight);
         resWidthField.setTextFieldListener(validator);
+        resWidthField.setText(prefs.getString("resolution_width"));
         stage.addActor(resWidthField);
 
         final TextField resHeightField = new TextField("res y", skin);
-        resHeightField.setPosition(xPosRight + getPos(buttonWidth, 1), yStart);
+        resHeightField.setPosition(xPosRight + getPos(buttonWidth, 1), yStart - getPos(buttonHeight, 1));
         resHeightField.setSize(buttonWidth, buttonHeight);
         resHeightField.setTextFieldListener(validator);
+        resHeightField.setText(prefs.getString("resolution_height"));
         stage.addActor(resHeightField);
 
 
         final TextButton saveButton = new TextButton("Save", skin); // Use the initialized skin
-        saveButton.setPosition(xPosLeft + getPos(buttonWidth, 1), yStart - getPos(buttonHeight, 1));
+        saveButton.setPosition(xPosLeft + getPos(buttonWidth, 2), yStart - getPos(buttonHeight, 2));
         saveButton.setSize(buttonWidth, buttonHeight);
-        saveButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                saveButton.setChecked(false);
-                int resWidth;
-                int resHeight;
-                try {
-                    resWidth = Integer.parseInt(resWidthField.getText());
-                } catch (Exception e) {
-                    TextFieldValidator.setFieldInvalidInput(resWidthField);
-                    return;
-                }
-
-                try {
-                    resHeight = Integer.parseInt(resHeightField.getText());
-                } catch (Exception e) {
-                    TextFieldValidator.setFieldInvalidInput(resHeightField);
-                    return;
-                }
-                try {
-                    Aspect.getFromAspect((float) resWidth / (float) resHeight);
-                } catch (Exception e) {
-                    TextFieldValidator.setFieldInvalidInput(resWidthField);
-                    TextFieldValidator.setFieldInvalidInput(resHeightField);
-                    game.addChatMessage("Invalid aspect ratio", "debug");
-                    return;
-                }
-                prefs.putInteger("resolution_width", resWidth);
-                prefs.putInteger("resolution_height", resHeight);
-                prefs.flush();
-                game.addChatMessage("Settings saved", "debug");
-            }
-        });
+        saveButton.addListener(new SaveListener(game, resWidthField, resHeightField, nameField, prefs, saveButton));
         stage.addActor(saveButton);
 
         TextButton backButton = new TextButton("Back", skin); // Use the initialized skin
-        backButton.setPosition(xPosLeft, yStart - getPos(buttonHeight, 1));
+        backButton.setPosition(xPosLeft, yStart - getPos(buttonHeight, 2));
         backButton.setSize(buttonWidth, buttonHeight);
         backButton.addListener(new ChangeListener() {
             @Override

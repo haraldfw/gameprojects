@@ -1,4 +1,4 @@
-package com.wilhelmsen.exile.chat;
+package com.wilhelmsen.exile.screen.overlay;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,89 +6,102 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Splitter;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Harald on 28.02.2017.
  */
-public class ChatOverlay {
+public class Chat {
 
     private final int maxEntries = 20;
     private final int entriesOnUpdate = 3;
     private final int maxCharactersWidth = 50;
     private final int showNewMessagesForSeconds = 5;
     private final SimpleDateFormat simpleDateFormat;
-    private final float xShift = 20;
-    private final float yShiftPerLine = 3;
     private LinkedList<String> messages;
     private float secondsSinceLastMessage = Float.POSITIVE_INFINITY;
     private boolean isActive = false;
-    private SpriteBatch chatBatch;
-    private BitmapFont chatFont;
 
     private TextField textInput;
+    private Label textMessageLabel;
+
+    private Group group;
+    private Overlay overlay;
     private Stage stage;
 
-    public ChatOverlay() {
-        this.chatBatch = new SpriteBatch();
+    public Chat(Stage stage, Overlay overlay) {
+        this.overlay = overlay;
+        this.stage = stage;
         messages = new LinkedList<>();
-        simpleDateFormat = new SimpleDateFormat("H:m:s");
-        chatFont = new BitmapFont();
-        chatFont.setColor(Color.WHITE);
-        stage = new Stage();
-        textInput = new TextField("", createBasicSkin());
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        Skin skin = createBasicSkin();
+        textInput = new TextField("", skin);
         textInput.setPosition(0, 0);
-        textInput.setSize(400, chatFont.getLineHeight()*1.2f);
-        stage.addActor(textInput);
+        textInput.setSize(400, 40);
+        group = new Group();
+        textMessageLabel = new Label("", skin);
+        textMessageLabel.setAlignment(Align.topLeft);
+        textMessageLabel.setPosition(0, 40);
+        group.addActor(textInput);
+        group.addActor(textMessageLabel);
+        stage.addActor(group);
     }
 
-    public void draw(float delta) {
+    public void update(float delta) {
         secondsSinceLastMessage += delta;
 
-        chatBatch.begin();
         if (isActive) {
-            drawTextField();
-            drawMessages(maxEntries);
-        } else if (secondsSinceLastMessage < showNewMessagesForSeconds) {
-            drawMessages(entriesOnUpdate);
-        }
-        chatBatch.end();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            if(isActive) {
-                addMessage(textInput.getText(), "you");
-                textInput.setText("");
-            } else {
-                Gdx.input.setInputProcessor(stage);
-                stage.setKeyboardFocus(textInput);
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                exitChat();
+                isActive = !isActive;
             }
-            isActive = !isActive;
+        } else if (secondsSinceLastMessage > showNewMessagesForSeconds) {
+            textMessageLabel.setText(null);
+            textMessageLabel.setVisible(false);
         }
     }
 
-    private void drawTextField() {
-//        textInput.draw(chatBatch, 1);
-        stage.act();
-        stage.draw();
+    private void exitChat() {
+        textInput.setText("");
+        textInput.setVisible(false);
+        overlay.relieveKeyboardFocus();
+        overlay.relieveInput();
     }
 
-    private void drawMessages(int messageAmount) {
+    private void updateMessageLabel(int messageAmount) {
+        List<String> msgs = new ArrayList<>();
         int endIndex = messages.size() - messageAmount;
-        float shiftIndex = 0;
         for (int i = messages.size() - 1; i >= 0 && i >= endIndex; i--) {
-            shiftIndex++;
-            String message = messages.get(i);
-            chatFont.draw(chatBatch, message, xShift, chatFont.getLineHeight() * (shiftIndex + yShiftPerLine));
+            msgs.add(0, messages.get(i));
         }
+        textMessageLabel.setVisible(true);
+        textMessageLabel.setText(String.join("\n", msgs));
+        textMessageLabel.setPosition(0, 40 + msgs.size() * textMessageLabel.getStyle().font.getLineHeight());
+    }
+
+    void chatActivationKeyPressed() {
+        if (isActive) {
+            addMessage(textInput.getText(), "you");
+            exitChat();
+        } else {
+            updateMessageLabel(maxEntries);
+            group.getChildren().forEach(actor -> actor.setVisible(true));
+            overlay.claimKeyboardFocus(textInput);
+            overlay.claimInput(stage);
+        }
+        isActive = !isActive;
     }
 
     public void addMessage(String message, String sender) {
@@ -102,6 +115,7 @@ public class ChatOverlay {
                 addToMessageList(part);
             }
         }
+        updateMessageLabel(entriesOnUpdate);
     }
 
     private void addToMessageList(String message) {
@@ -111,9 +125,7 @@ public class ChatOverlay {
         }
     }
 
-
-
-    // Here for debugging
+    // Here for debugging !duplicate code!
     private Skin createBasicSkin() {
         //Create a font
         BitmapFont font = new BitmapFont();
@@ -134,6 +146,13 @@ public class ChatOverlay {
         textFieldStyle.font = skin.getFont("default");
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.focusedFontColor = Color.WHITE;
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = new BitmapFont();
+        ;
+        labelStyle.fontColor = Color.WHITE;
+        labelStyle.background = skin.newDrawable("background", new Color(0.1f, 0.1f, 0.1f, 1));
+        skin.add("default", labelStyle);
 
         skin.add("default", textFieldStyle);
         return skin;
