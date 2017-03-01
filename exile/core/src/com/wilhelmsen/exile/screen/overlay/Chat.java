@@ -50,6 +50,7 @@ public class Chat {
         textInput = new TextField("", skin);
         textInput.setPosition(0, 0);
         textInput.setSize(400, 40);
+        textInput.setMaxLength(64);
         group = new Group();
         textMessageLabel = new Label("", skin);
         textMessageLabel.setAlignment(Align.topLeft);
@@ -149,7 +150,7 @@ public class Chat {
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
-        ;
+
         labelStyle.fontColor = Color.WHITE;
         labelStyle.background = skin.newDrawable("background", new Color(0.1f, 0.1f, 0.1f, 1));
         skin.add("default", labelStyle);

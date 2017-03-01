@@ -33,6 +33,7 @@ public class Overlay {
         stage.draw();
     }
 
+    // only allows 2 layers of input. Will need a Stack to allow for n layers
     void claimKeyboardFocus(Actor actor) {
         prevFocus = stage.getKeyboardFocus();
         stage.setKeyboardFocus(actor);
