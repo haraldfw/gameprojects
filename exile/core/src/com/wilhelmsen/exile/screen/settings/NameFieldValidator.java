@@ -19,6 +19,7 @@ public class NameFieldValidator implements TextField.TextFieldListener {
     @Override
     public void keyTyped(TextField textField, char c) {
         final int nameMinChars = 4;
+        if (textField.getText().length() < nameMinChars) {
             setFieldInvalidInput(textField);
         } else {
             setFieldValidInput(textField);
