@@ -51,6 +51,7 @@ public class Chat {
         textInput.setPosition(0, 0);
         textInput.setSize(400, 40);
         textInput.setMaxLength(64);
+        textInput.setVisible(false);
         group = new Group();
         textMessageLabel = new Label("", skin);
         textMessageLabel.setAlignment(Align.topLeft);
